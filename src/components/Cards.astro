@@ -1,0 +1,36 @@
+---
+import type { ImageDatas } from "../interfaces/interfaces";
+
+interface Props {
+  data: ImageDatas;
+}
+
+const { urls, user, width, height } = Astro.props.data;
+---
+
+<div class="w-full rounded-md overflow-hidden">
+  <div class="relative group cursor-pointer">
+    <a href="#">
+      <img
+        width={width}
+        height={height}
+        src={urls.small}
+        alt="unsplash-image"
+      />
+    </a>
+    <a
+      href={`/users/${user.username}`}
+      class="absolute bottom-4 left-4 group-hover:flex items-center space-x-4 hidden group-hover:transition-all duration-300 ease-in-out"
+    >
+      <div class="w-8 h-8 rounded-md overflow-hidden">
+        <img
+          src={user.profile_image.medium}
+          alt=""
+        />
+      </div>
+      <p class="font-medium text-lg hover:text-zinc-200">
+        {user.name}
+      </p>
+    </a>
+  </div>
+</div>

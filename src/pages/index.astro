@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Cards from "../components/Cards.astro";
+import type { ImageDatas } from "../interfaces/interfaces";
+
+const API_KEY = import.meta.env.TOP_SECRET;
+let imageDatas = [] as ImageDatas[];
+
+let response = await fetch(
+  `https://api.unsplash.com/photos/?client_id=${API_KEY}`
+);
+let data = await response.json();
+
+imageDatas = data;
+---
+
+<script lang="ts"></script>
+
+<Layout title="First Astro App">
+  <div
+    class="columns-1 md:columns-2 lg:columns-3 break-before-avoid space-y-4 inline-block text-zinc-100 py-8"
+  >
+    {imageDatas?.map((data) => <Cards data={data} />)}
+  </div>
+</Layout>

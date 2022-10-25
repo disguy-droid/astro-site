@@ -1,0 +1,72 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ProfileBanner from "../../components/ProfileBanner.astro";
+import type {
+  ImageDatas,
+  User,
+  Urls,
+  UserData,
+} from "../../interfaces/interfaces";
+
+export async function getStaticPaths() {
+  const API_KEY = import.meta.env.TOP_SECRET;
+  let imageDatas = [] as ImageDatas[];
+
+  let response = await fetch(
+    `https://api.unsplash.com/photos/?client_id=${API_KEY}`
+  );
+  let datas = await response.json();
+
+  return datas.map(({ user, urls }: { user: User; urls: Urls }) => {
+    return {
+      params: { name: `${user.username}` },
+      props: {
+        url: `${urls.small}`,
+        username: `${user.username}`,
+        profile_image: `${user.profile_image.large}`,
+        portfolio_url: `${user.social.portfolio_url}`,
+        instagram: `${user.social.instagram_username}`,
+        twitter: `${user.social.twitter_username}`,
+        bio: `${user.bio}`,
+        location: `${user.location}`,
+      },
+    };
+  });
+}
+
+const API_KEY = import.meta.env.TOP_SECRET;
+const { name } = Astro.params;
+const {
+  username,
+  profile_image,
+  instagram,
+  twitter,
+  bio,
+  portfolio_url,
+  location,
+} = Astro.props;
+
+let user_data = [] as UserData[];
+
+let user_res = await fetch(
+  `https://api.unsplash.com/users/${username}/?client_id=${API_KEY}`
+);
+
+let res_user_data = await user_res.json();
+user_data = res_user_data;
+---
+
+<Layout title={name}>
+  <div class="py-8 flex justify-center w-full">
+    <ProfileBanner
+      name={name}
+      username={username}
+      profile_image={profile_image}
+      instagram_username={instagram}
+      twitter_username={twitter}
+      bio={bio}
+      portfolio_url={portfolio_url}
+      location={location}
+    />
+  </div>
+</Layout>
