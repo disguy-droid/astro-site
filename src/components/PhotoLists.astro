@@ -1,0 +1,20 @@
+---
+import type { ImageDatas } from "../interfaces/interfaces";
+
+export default interface Props {
+  photo: ImageDatas;
+}
+
+const { urls, width, height } = Astro.props.photo;
+---
+
+<section class="w-full rounded-md overflow-hidden">
+  <div class="relative group">
+    <img
+      width={width}
+      height={height}
+      src={urls.regular}
+      alt="unsplash-image"
+    />
+  </div>
+</section>

@@ -1,0 +1,13 @@
+---
+export default interface IProps {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div>
+  <button class="px-4 py-2 bg-zinc-200 rounded-3xl text-zinc-900">
+    {title}
+  </button>
+</div>

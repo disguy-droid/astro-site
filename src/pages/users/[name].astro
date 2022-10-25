@@ -1,12 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ProfileBanner from "../../components/ProfileBanner.astro";
-import type {
-  ImageDatas,
-  User,
-  Urls,
-  UserData,
-} from "../../interfaces/interfaces";
+import PhotoLists from "../../components/PhotoLists.astro";
+import Button from "../../components/Button.astro";
+import type { ImageDatas, User, Urls } from "../../interfaces/interfaces";
 
 export async function getStaticPaths() {
   const API_KEY = import.meta.env.TOP_SECRET;
@@ -46,18 +43,18 @@ const {
   location,
 } = Astro.props;
 
-let user_data = [] as UserData[];
+let user_photos = [] as ImageDatas[];
 
 let user_res = await fetch(
-  `https://api.unsplash.com/users/${username}/?client_id=${API_KEY}`
+  `https://api.unsplash.com/users/${username}/photos/?client_id=${API_KEY}`
 );
 
 let res_user_data = await user_res.json();
-user_data = res_user_data;
+user_photos = res_user_data;
 ---
 
 <Layout title={name}>
-  <div class="py-8 flex justify-center w-full">
+  <div class="py-8 flex flex-col justify-center w-full space-y-8">
     <ProfileBanner
       name={name}
       username={username}
@@ -68,5 +65,12 @@ user_data = res_user_data;
       portfolio_url={portfolio_url}
       location={location}
     />
+
+    <Button title={"Hello"} />
+    <section
+      class="columns-1 md:columns-2 lg:columns-3 break-before-avoid space-y-4 inline-block text-zinc-100"
+    >
+      {user_photos?.map((photo) => <PhotoLists photo={photo} />)}
+    </section>
   </div>
 </Layout>

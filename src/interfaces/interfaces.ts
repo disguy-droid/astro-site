@@ -57,29 +57,28 @@ export interface Urls {
   small: string;
 }
 
-export interface UserData {
+export interface Photos {
   id: string;
-  width: number;
-  height: number;
+  username: string;
+  name: string;
+  bio: string;
+  photos: [
+    {
+      id: string;
+      urls: {
+        raw: string;
+        regular: string;
+        small: string;
+      };
+    }
+  ];
+}
+
+export interface Photo {
+  id: string;
   urls: {
     raw: string;
     regular: string;
     small: string;
-  };
-  links: {
-    self: string;
-    download: string;
-  };
-  user: {
-    id: string;
-    username: string;
-    name: string;
-    first_name: string;
-    last_name: string;
-    profile_image: {
-      small: string;
-      medium: string;
-      large: string;
-    };
   };
 }
