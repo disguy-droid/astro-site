@@ -19,8 +19,9 @@ imageDatas = data;
     class="columns-1 md:columns-2 lg:columns-3 break-before-avoid space-y-4 inline-block text-zinc-100 py-8"
   >
     {
-      imageDatas?.map(({ urls, user, width, height, links }) => (
+      imageDatas?.map(({ id, urls, user, width, height, links }) => (
         <Cards
+          id={id}
           urls={urls}
           user={user}
           width={width}

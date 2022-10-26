@@ -1,0 +1,109 @@
+---
+import { Image } from "@astrojs/image/components";
+import type { ImageDatas, Photos } from "../../interfaces/interfaces";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const API_KEY = import.meta.env.TOP_SECRET;
+  let imageDatas = [] as ImageDatas[];
+
+  let response = await fetch(
+    `https://api.unsplash.com/photos/?client_id=${API_KEY}`
+  );
+  let datas = await response.json();
+  imageDatas = datas;
+
+  return imageDatas?.map(({ id }) => {
+    return {
+      params: { id },
+    };
+  });
+}
+
+const { id } = Astro.params;
+const API_KEY = import.meta.env.TOP_SECRET;
+let photo_datas = {} as Photos;
+
+let photo_res = await fetch(
+  `https://api.unsplash.com/photos/${id}?client_id=${API_KEY}`
+);
+let res_photo_data = await photo_res.json();
+photo_datas = res_photo_data;
+
+const { user, links, urls, width, height, created_at, likes } = photo_datas;
+---
+
+<Layout title={id}>
+  <div class="w-full rounded-md overflow-hidden text-white space-y-4">
+    <div class="flex justify-between w-full items-center py-4">
+      <a
+        href={`/users/${user.username}`}
+        class="flex items-center space-x-2 transition-all duration-300 ease-in-out bg-zinc-800 px-2 py-2 rounded-md text-sm lg:text-base"
+      >
+        <div class="w-8 h-8 rounded-md overflow-hidden">
+          <img
+            src={user.profile_image.medium}
+            alt=""
+          />
+        </div>
+        <p class="font-medium hover:text-zinc-300">
+          {user.name}
+        </p>
+      </a>
+      <a
+        href={links.download}
+        download
+        target="_blank"
+        class="flex space-x-2 items-center bg-zinc-800 px-2 py-3 rounded hover:text-zinc-300/80 justify-center text-sm lg:text-base"
+      >
+        <span class="inline-block">Download</span>
+        <button class="flex items-center space-x-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-download w-4 h-4"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"
+            ></path>
+            <path
+              d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"
+            ></path>
+          </svg>
+        </button>
+      </a>
+    </div>
+
+    <div class="flex justify-center w-full">
+      <Image
+        width={1080}
+        aspectRatio={`${width}:${height}`}
+        src={urls.regular}
+        alt={"unsplash-image"}
+        class="rounded-md w-[400px]"
+        format={"webp"}
+        quality={50}
+      />
+    </div>
+
+    <div class="flex w-full items-center justify-around py-4">
+      <div class="flex space-x-2 text-sm">
+        <p class="font-medium">Posted on:</p>
+        <span class="text-zinc-300"
+          >{new Date(created_at).toLocaleDateString()}</span
+        >
+      </div>
+      <div class="flex space-x-2 text-sm">
+        <p class="font-medium">Dimension:</p>
+        <span class="text-zinc-300"> {width} x {height}</span>
+      </div>
+      <div class="flex space-x-2 text-sm">
+        <p class="font-medium">Likes:</p>
+        <span class="text-zinc-300"> {likes}</span>
+      </div>
+    </div>
+  </div>
+</Layout>

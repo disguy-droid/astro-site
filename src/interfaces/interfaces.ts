@@ -1,7 +1,9 @@
 export interface ImageDatas {
-  id: number;
+  id: string;
+  created_at: string;
   width: number;
   height: number;
+  likes: number;
   urls: {
     raw: string;
     regular: string;
@@ -103,4 +105,56 @@ export interface UserPhotos {
     };
   };
   likes: number;
+}
+
+export interface Photos {
+  id: string;
+  created_at: string;
+  width: number;
+  height: number;
+  color: string;
+  description: string;
+  alt_description: string;
+  urls: {
+    full: string;
+    regular: string;
+    small: string;
+  };
+  links: {
+    self: string;
+    download: string;
+  };
+  likes: number;
+  user: {
+    id: string;
+    username: string;
+    name: string;
+    bio: string;
+    location: string;
+    links: {
+      self: string;
+      likes: number;
+    };
+    profile_image: {
+      small: number;
+      medium: string;
+      large: string;
+    };
+  };
+  exif: {
+    make: string;
+    model: string;
+    name: string;
+    exposure: string;
+    aperture: string;
+    focal_length: string;
+    iso: number;
+  };
+  location: {
+    name: string;
+    city: string;
+    country: string;
+  };
+  views: number;
+  downloads: number;
 }

@@ -26,8 +26,8 @@ export async function getStaticPaths() {
   });
 }
 
-const API_KEY = import.meta.env.TOP_SECRET;
 const { name } = Astro.params;
+const API_KEY = import.meta.env.TOP_SECRET;
 let user_datas = {} as UserDatas;
 let user_data_photos = [] as UserPhotos[];
 
