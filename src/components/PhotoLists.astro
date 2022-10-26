@@ -11,11 +11,12 @@ export interface PhotoListProps {
 const { urls, width, height } = Astro.props as PhotoListProps;
 ---
 
-<div class="w-full rounded-md overflow-hidden">
+<div class="w-full rounded-md overflow-hidden group">
   <img
     width={width}
     height={height}
     src={urls.regular}
     alt="unsplash-image"
+    class="group-hover:scale-110 transition-all ease-in-out duration-500"
   />
 </div>

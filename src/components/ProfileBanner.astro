@@ -45,12 +45,13 @@ const {
 
   {
     function () {
-      if (bio === "null") {
-        return null;
-      } else {
-        <p class="text-sm text-zinc-100 max-w-md text-center leading-relaxed ">
-          {bio}
-        </p>;
+      if (bio === null) return null;
+      else {
+        return (
+          <p class="text-sm text-zinc-100 max-w-md text-center leading-relaxed ">
+            {bio}
+          </p>
+        );
       }
     }
   }
@@ -61,7 +62,7 @@ const {
   >
     {
       function () {
-        if (location === "null") return null;
+        if (location === null) return null;
         else
           return (
             <a
@@ -92,7 +93,7 @@ const {
     <div class="flex items-center space-x-4 text-white">
       {
         function () {
-          if (social.portfolio_url === "null") return null;
+          if (social.portfolio_url === null) return null;
           else
             return (
               <a
@@ -116,7 +117,7 @@ const {
 
       {
         function () {
-          if (social.twitter_username === "null") return null;
+          if (social.twitter_username === null) return null;
           else
             return (
               <a
@@ -139,7 +140,7 @@ const {
       }
       {
         function () {
-          if (social.instagram_username === "null") return null;
+          if (social.instagram_username === null) return null;
           else
             return (
               <a
@@ -163,16 +164,16 @@ const {
     </div>
   </div>
 
-  <div class="text-zinc-200 flex space-x-4">
-    <div class="text-center space-y-1">
+  <div class="text-zinc-200 flex items-center space-x-4">
+    <div class="text-center">
       <h2 class="font-medium text-base">Followers</h2>
-      <p class="text-sm text-zinc-300">
+      <p class="text-sm text-zinc-300 mt-1">
         {followers}
       </p>
     </div>
-    <div class="text-center space-y-1">
+    <div class="text-center">
       <h2 class="font-medium text-base">Following</h2>
-      <p class="text-sm text-zinc-300">
+      <p class="text-sm text-zinc-300 mt-1">
         {following}
       </p>
     </div>
