@@ -74,11 +74,13 @@ const {
       class="columns-1 md:columns-2 lg:columns-3 break-before-avoid space-y-4 inline-block text-zinc-100"
     >
       {
-        user_data_photos.map(({ urls, width, height }) => (
+        user_data_photos.map(({ user, urls, width, height, links }) => (
           <PhotoLists
             urls={urls}
             width={width}
             height={height}
+            links={links}
+            user={user}
           />
         ))
       }

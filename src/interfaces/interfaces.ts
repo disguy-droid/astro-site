@@ -6,6 +6,7 @@ export interface ImageDatas {
     raw: string;
     regular: string;
     small: string;
+    thumb: string;
   };
   links: {
     self: string;
@@ -47,6 +48,10 @@ export interface UserDatas {
   };
   total_likes: number;
   total_photos: number;
+  links: {
+    self: string;
+    download: string;
+  };
   social: {
     instagram_username: string;
     portfolio_url: string;
@@ -83,6 +88,19 @@ export interface UserPhotos {
     raw: string;
     regular: string;
     small: string;
+  };
+  links: {
+    self: string;
+    download: string;
+  };
+  user: {
+    username: string;
+    name: string;
+    profile_image: {
+      small: string;
+      medium: string;
+      large: string;
+    };
   };
   likes: number;
 }
