@@ -2,29 +2,37 @@
 export interface ProfileProps {
   name: string;
   username: string;
-  profile_image: string;
-  instagram_username: string;
-  twitter_username: string;
+  profile_image: {
+    small: string;
+    medium: string;
+    large: string;
+  };
   bio: string;
-  portfolio_url: string;
+  social: {
+    instagram_username: string;
+    twitter_username: string;
+    portfolio_url: string;
+  };
   location: string;
+  followers: number;
+  following: number;
 }
 
 const {
   name,
   username,
   profile_image,
-  instagram_username,
-  twitter_username,
   bio,
-  portfolio_url,
   location,
+  social,
+  followers,
+  following,
 } = Astro.props as ProfileProps;
 ---
 
 <div class="flex flex-col items-center space-y-4">
   <img
-    src={profile_image}
+    src={profile_image.large}
     alt="users_profile_image"
     class="rounded-full"
   />
@@ -84,11 +92,11 @@ const {
     <div class="flex items-center space-x-4 text-white">
       {
         function () {
-          if (portfolio_url === "null") return null;
+          if (social.portfolio_url === "null") return null;
           else
             return (
               <a
-                href={`${portfolio_url}`}
+                href={`${social.portfolio_url}`}
                 target="_blank"
               >
                 <svg
@@ -108,11 +116,11 @@ const {
 
       {
         function () {
-          if (twitter_username === "null") return null;
+          if (social.twitter_username === "null") return null;
           else
             return (
               <a
-                href={`https://twitter.com/${twitter_username}`}
+                href={`https://twitter.com/${social.twitter_username}`}
                 target="_blank"
               >
                 <svg
@@ -131,11 +139,11 @@ const {
       }
       {
         function () {
-          if (instagram_username === "null") return null;
+          if (social.instagram_username === "null") return null;
           else
             return (
               <a
-                href={`https://instagram.com/${instagram_username}`}
+                href={`https://instagram.com/${social.instagram_username}`}
                 target="_blank"
               >
                 <svg
@@ -156,13 +164,17 @@ const {
   </div>
 
   <div class="text-zinc-200 flex space-x-4">
-    <div>
+    <div class="text-center space-y-1">
       <h2 class="font-medium text-base">Followers</h2>
-      <p class="text-sm text-zinc-300"></p>
+      <p class="text-sm text-zinc-300">
+        {followers}
+      </p>
     </div>
-    <div>
+    <div class="text-center space-y-1">
       <h2 class="font-medium text-base">Following</h2>
-      <p class="text-sm text-zinc-300"></p>
+      <p class="text-sm text-zinc-300">
+        {following}
+      </p>
     </div>
   </div>
 </div>

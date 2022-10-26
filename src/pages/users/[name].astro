@@ -3,7 +3,11 @@ import Layout from "../../layouts/Layout.astro";
 import ProfileBanner from "../../components/ProfileBanner.astro";
 import PhotoLists from "../../components/PhotoLists.astro";
 import Button from "../../components/Button.astro";
-import type { ImageDatas } from "../../interfaces/interfaces";
+import type {
+  ImageDatas,
+  UserDatas,
+  UserPhotos,
+} from "../../interfaces/interfaces";
 
 export async function getStaticPaths() {
   const API_KEY = import.meta.env.TOP_SECRET;
@@ -18,50 +22,37 @@ export async function getStaticPaths() {
   return imageDatas?.map(({ user, urls }) => {
     return {
       params: { name: `${user.username}` },
-      props: {
-        url: `${urls.small}`,
-        username: `${user.username}`,
-        profile_image: `${user.profile_image.large}`,
-        portfolio_url: `${user.social.portfolio_url}`,
-        instagram: `${user.social.instagram_username}`,
-        twitter: `${user.social.twitter_username}`,
-        bio: `${user.bio}`,
-        location: `${user.location}`,
-      },
     };
   });
 }
 
-export interface Props {
-  username: string;
-  profile_image: string;
-  instagram: string;
-  twitter: string;
-  bio: string;
-  portfolio_url: string;
-  location: string;
-}
+const API_KEY = import.meta.env.TOP_SECRET;
+const { name } = Astro.params;
+let user_datas = {} as UserDatas;
+let user_data_photos = [] as UserPhotos[];
+
+let user_data_res = await fetch(
+  `https://api.unsplash.com/users/${name}/?client_id=${API_KEY}`
+);
+let res_user_data = await user_data_res.json();
+
+let user_data_photo_res = await fetch(
+  `https://api.unsplash.com/users/${name}/photos/?client_id=${API_KEY}`
+);
+let res_user_data_photos = await user_data_photo_res.json();
+
+user_datas = res_user_data;
+user_data_photos = res_user_data_photos;
 
 const {
   username,
   profile_image,
-  instagram,
-  twitter,
   bio,
-  portfolio_url,
+  social,
   location,
-} = Astro.props as Props;
-
-const API_KEY = import.meta.env.TOP_SECRET;
-const { name } = Astro.params;
-let user_photos = [] as ImageDatas[];
-
-let user_res = await fetch(
-  `https://api.unsplash.com/users/${name}/photos/?client_id=${API_KEY}`
-);
-let res_user_data = await user_res.json();
-
-user_photos = res_user_data;
+  followers_count,
+  following_count,
+} = user_datas;
 ---
 
 <Layout title={name}>
@@ -70,19 +61,20 @@ user_photos = res_user_data;
       name={name}
       username={username}
       profile_image={profile_image}
-      instagram_username={instagram}
-      twitter_username={twitter}
       bio={bio}
-      portfolio_url={portfolio_url}
+      social={social}
       location={location}
+      followers={followers_count}
+      following={following_count}
     />
 
     <Button title={"Hello"} />
+
     <section
       class="columns-1 md:columns-2 lg:columns-3 break-before-avoid space-y-4 inline-block text-zinc-100"
     >
       {
-        user_photos?.map(({ urls, width, height }) => (
+        user_data_photos.map(({ urls, width, height }) => (
           <PhotoLists
             urls={urls}
             width={width}
