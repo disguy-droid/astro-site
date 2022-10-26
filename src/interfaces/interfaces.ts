@@ -157,4 +157,25 @@ export interface Photos {
   };
   views: number;
   downloads: number;
+  related_collections: {
+    type: string;
+    results: [
+      {
+        id: string;
+        title: string;
+        description: string;
+        published_at: string;
+        cover_photo: {
+          id: string;
+          width: number;
+          height: number;
+          urls: {
+            full: string;
+            regular: string;
+            small: string;
+          };
+        };
+      }
+    ];
+  };
 }

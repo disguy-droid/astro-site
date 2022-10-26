@@ -30,11 +30,25 @@ let photo_res = await fetch(
 let res_photo_data = await photo_res.json();
 photo_datas = res_photo_data;
 
-const { user, links, urls, width, height, created_at, likes } = photo_datas;
+const {
+  user,
+  links,
+  urls,
+  width,
+  height,
+  created_at,
+  likes,
+  views,
+  downloads,
+  related_collections,
+} = photo_datas;
+
+const imageWidth = `${width}`;
+const imageHeight = `${height}`;
 ---
 
 <Layout title={id}>
-  <div class="w-full rounded-md overflow-hidden text-white space-y-4">
+  <div class="w-full rounded-md overflow-hidden text-white space-y-4 pb-12">
     <div class="flex justify-between w-full items-center py-4">
       <a
         href={`/users/${user.username}`}
@@ -54,7 +68,7 @@ const { user, links, urls, width, height, created_at, likes } = photo_datas;
         href={links.download}
         download
         target="_blank"
-        class="flex space-x-2 items-center bg-zinc-800 px-2 py-3 rounded hover:text-zinc-300/80 justify-center text-sm lg:text-base"
+        class="flex space-x-2 items-center bg-zinc-800 px-3 py-3 rounded hover:text-zinc-300/80 justify-center text-sm lg:text-base"
       >
         <span class="inline-block">Download</span>
         <button class="flex items-center space-x-4">
@@ -77,19 +91,25 @@ const { user, links, urls, width, height, created_at, likes } = photo_datas;
       </a>
     </div>
 
-    <div class="flex justify-center w-full">
+    <div
+      id="image-container"
+      class="flex justify-center mx-auto"
+    >
       <Image
-        width={1080}
+        width={width}
+        height={height}
         aspectRatio={`${width}:${height}`}
         src={urls.regular}
         alt={"unsplash-image"}
-        class="rounded-md w-[400px]"
+        class="object-contain rounded-lg"
         format={"webp"}
         quality={50}
       />
     </div>
 
-    <div class="flex w-full items-center justify-around py-4">
+    <div
+      class="flex flex-col md:flex-row w-full items-center justify-around py-4"
+    >
       <div class="flex space-x-2 text-sm">
         <p class="font-medium">Posted on:</p>
         <span class="text-zinc-300"
@@ -104,6 +124,42 @@ const { user, links, urls, width, height, created_at, likes } = photo_datas;
         <p class="font-medium">Likes:</p>
         <span class="text-zinc-300"> {likes}</span>
       </div>
+      <div class="flex space-x-2 text-sm">
+        <p class="font-medium">Views:</p>
+        <span class="text-zinc-300"> {views}</span>
+      </div>
+      <div class="flex space-x-2 text-sm">
+        <p class="font-medium">Downloads:</p>
+        <span class="text-zinc-300"> {downloads}</span>
+      </div>
+    </div>
+
+    <div class="">
+      <h2 class="text-lg font-medium">Related Photos</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
+        {
+          related_collections.results?.map(({ cover_photo }) => (
+            <Image
+              width={600}
+              aspectRatio={`${cover_photo.width}:${cover_photo.height}`}
+              src={cover_photo.urls.regular}
+              class:list={"rounded-md"}
+              alt={"related_image"}
+              format={"webp"}
+              quality={50}
+            />
+          ))
+        }
+      </div>
     </div>
   </div>
 </Layout>
+
+<style define:vars={{ imageWidth, imageHeight }}>
+  #image-container {
+    max-height: 75vh;
+    min-height: 300px;
+    max-width: calc((var(--imageWidth) / var(--imageHeight)) * 60vw);
+    min-width: calc((var(--imageWidth) / var(--imageHeight)) * 300px);
+  }
+</style>
