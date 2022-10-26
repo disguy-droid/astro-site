@@ -1,11 +1,26 @@
 ---
 import type { ImageDatas } from "../interfaces/interfaces";
 
-export default interface Props {
-  data: ImageDatas;
+export interface CardProps {
+  urls: {
+    regular: string;
+    small: string;
+  };
+  user: {
+    id: string;
+    name: string;
+    username: string;
+    profile_image: {
+      small: string;
+      medium: string;
+      large: string;
+    };
+  };
+  width: number;
+  height: number;
 }
 
-const { urls, user, width, height } = Astro.props.data;
+const { urls, user, width, height } = Astro.props as CardProps;
 ---
 
 <div class="w-full rounded-md overflow-hidden">

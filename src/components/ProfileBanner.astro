@@ -1,5 +1,5 @@
 ---
-export default interface Props {
+export interface ProfileProps {
   name: string;
   username: string;
   profile_image: string;
@@ -19,7 +19,7 @@ const {
   bio,
   portfolio_url,
   location,
-} = Astro.props;
+} = Astro.props as ProfileProps;
 ---
 
 <div class="flex flex-col items-center space-y-3">

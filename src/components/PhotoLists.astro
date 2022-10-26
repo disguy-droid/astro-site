@@ -1,11 +1,14 @@
 ---
-import type { ImageDatas } from "../interfaces/interfaces";
-
-export default interface Props {
-  photo: ImageDatas;
+export interface PhotoListProps {
+  urls: {
+    regular: string;
+    small: string;
+  };
+  width: number;
+  height: number;
 }
 
-const { urls, width, height } = Astro.props.photo;
+const { urls, width, height } = Astro.props as PhotoListProps;
 ---
 
 <section class="w-full rounded-md overflow-hidden">
