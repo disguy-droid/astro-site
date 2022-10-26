@@ -22,7 +22,7 @@ const {
 } = Astro.props as ProfileProps;
 ---
 
-<div class="flex flex-col items-center space-y-3">
+<div class="flex flex-col items-center space-y-4">
   <img
     src={profile_image}
     alt="users_profile_image"
@@ -152,6 +152,17 @@ const {
             );
         }
       }
+    </div>
+  </div>
+
+  <div class="text-zinc-200 flex space-x-4">
+    <div>
+      <h2 class="font-medium text-base">Followers</h2>
+      <p class="text-sm text-zinc-300"></p>
+    </div>
+    <div>
+      <h2 class="font-medium text-base">Following</h2>
+      <p class="text-sm text-zinc-300"></p>
     </div>
   </div>
 </div>

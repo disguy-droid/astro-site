@@ -11,13 +11,11 @@ export interface PhotoListProps {
 const { urls, width, height } = Astro.props as PhotoListProps;
 ---
 
-<section class="w-full rounded-md overflow-hidden">
-  <div class="relative group">
-    <img
-      width={width}
-      height={height}
-      src={urls.regular}
-      alt="unsplash-image"
-    />
-  </div>
-</section>
+<div class="w-full rounded-md overflow-hidden">
+  <img
+    width={width}
+    height={height}
+    src={urls.regular}
+    alt="unsplash-image"
+  />
+</div>

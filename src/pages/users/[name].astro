@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import ProfileBanner from "../../components/ProfileBanner.astro";
 import PhotoLists from "../../components/PhotoLists.astro";
 import Button from "../../components/Button.astro";
-import type { ImageDatas, User, Urls } from "../../interfaces/interfaces";
+import type { ImageDatas } from "../../interfaces/interfaces";
 
 export async function getStaticPaths() {
   const API_KEY = import.meta.env.TOP_SECRET;
@@ -13,8 +13,9 @@ export async function getStaticPaths() {
     `https://api.unsplash.com/photos/?client_id=${API_KEY}`
   );
   let datas = await response.json();
+  imageDatas = datas;
 
-  return datas.map(({ user, urls }: { user: User; urls: Urls }) => {
+  return imageDatas?.map(({ user, urls }) => {
     return {
       params: { name: `${user.username}` },
       props: {
@@ -41,8 +42,6 @@ export interface Props {
   location: string;
 }
 
-const API_KEY = import.meta.env.TOP_SECRET;
-const { name } = Astro.params;
 const {
   username,
   profile_image,
@@ -53,13 +52,15 @@ const {
   location,
 } = Astro.props as Props;
 
+const API_KEY = import.meta.env.TOP_SECRET;
+const { name } = Astro.params;
 let user_photos = [] as ImageDatas[];
 
 let user_res = await fetch(
-  `https://api.unsplash.com/users/${username}/photos/?client_id=${API_KEY}`
+  `https://api.unsplash.com/users/${name}/photos/?client_id=${API_KEY}`
 );
-
 let res_user_data = await user_res.json();
+
 user_photos = res_user_data;
 ---
 

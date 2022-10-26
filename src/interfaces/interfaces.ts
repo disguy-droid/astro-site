@@ -15,6 +15,7 @@ export interface ImageDatas {
     id: string;
     username: string;
     name: string;
+    bio: string;
     first_name: string;
     last_name: string;
     location: string;
@@ -23,6 +24,8 @@ export interface ImageDatas {
       medium: string;
       large: string;
     };
+    total_likes: number;
+    total_photos: number;
     social: {
       instagram_username: string;
       portfolio_url: string;
@@ -31,30 +34,40 @@ export interface ImageDatas {
   };
 }
 
-export interface User {
-  id: string;
-  username: string;
-  name: string;
-  first_name: string;
-  last_name: string;
-  bio: string;
-  location: string;
-  profile_image: {
+export interface UserDatas {
+  id: number;
+  width: number;
+  height: number;
+  urls: {
+    raw: string;
+    regular: string;
     small: string;
-    medium: string;
-    large: string;
   };
-  social: {
-    instagram_username: string;
-    twitter_username: string;
-    portfolio_url: string;
+  links: {
+    self: string;
+    download: string;
   };
-}
-
-export interface Urls {
-  raw: string;
-  regular: string;
-  small: string;
+  user: {
+    id: string;
+    username: string;
+    name: string;
+    bio: string;
+    first_name: string;
+    last_name: string;
+    location: string;
+    profile_image: {
+      small: string;
+      medium: string;
+      large: string;
+    };
+    total_likes: number;
+    total_photos: number;
+    social: {
+      instagram_username: string;
+      portfolio_url: string;
+      twitter_username: string;
+    };
+  };
 }
 
 export interface Photos {
@@ -72,13 +85,4 @@ export interface Photos {
       };
     }
   ];
-}
-
-export interface Photo {
-  id: string;
-  urls: {
-    raw: string;
-    regular: string;
-    small: string;
-  };
 }
