@@ -101,14 +101,14 @@ const imageHeight = `${height}`;
         aspectRatio={`${width}:${height}`}
         src={urls.regular}
         alt={"unsplash-image"}
-        class="object-contain rounded-lg"
+        class="object-contain rounded-lg border border-transparent"
         format={"webp"}
         quality={50}
       />
     </div>
 
     <div
-      class="flex flex-col md:flex-row w-full items-center justify-around py-4"
+      class="flex flex-col md:flex-row w-full md:items-center justify-around py-4 space-y-2 md:space-y-0"
     >
       <div class="flex space-x-2 text-sm">
         <p class="font-medium">Posted on:</p>
@@ -135,8 +135,10 @@ const imageHeight = `${height}`;
     </div>
 
     <div class="">
-      <h2 class="text-lg font-medium">Related Photos</h2>
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
+      <h2 class="text-lg lg:text-2xl font-medium">More like this</h2>
+      <div
+        class="columns-1 md:columns-2 lg:columns-3 gap-4 py-8 space-y-4 break-before-avoid"
+      >
         {
           related_collections.results?.map(({ cover_photo }) => (
             <Image
@@ -157,9 +159,18 @@ const imageHeight = `${height}`;
 
 <style define:vars={{ imageWidth, imageHeight }}>
   #image-container {
-    max-height: 75vh;
+    max-height: 72vh;
     min-height: 300px;
-    max-width: calc((var(--imageWidth) / var(--imageHeight)) * 60vw);
-    min-width: calc((var(--imageWidth) / var(--imageHeight)) * 300px);
+    /* max-width: calc((var(--imageWidth) / var(--imageHeight)) * 100vw); */
+    /* min-width: calc((var(--imageWidth) / var(--imageHeight)) * 300px); */
+  }
+
+  @media (min-width: 1024px) {
+    #image-container {
+      max-height: 75vh;
+      min-height: 250px;
+      max-width: calc((var(--imageWidth) / var(--imageHeight)) * 60vw);
+      min-width: calc((var(--imageWidth) / var(--imageHeight)) * 300px);
+    }
   }
 </style>
