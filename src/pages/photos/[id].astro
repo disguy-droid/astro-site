@@ -41,6 +41,7 @@ const {
   views,
   downloads,
   related_collections,
+  exif,
 } = photo_datas;
 
 const imageWidth = `${width}`;
@@ -52,7 +53,7 @@ const imageHeight = `${height}`;
     <div class="flex justify-between w-full items-center py-4">
       <a
         href={`/users/${user.username}`}
-        class="flex items-center space-x-2 transition-all duration-300 ease-in-out bg-zinc-800 px-2 py-2 rounded-md text-sm lg:text-base"
+        class="flex items-center space-x-3 transition-all duration-300 ease-in-out bg-zinc-800 px-3 py-2 rounded-md text-sm lg:text-base"
       >
         <div class="w-8 h-8 rounded-md overflow-hidden">
           <img
@@ -68,7 +69,7 @@ const imageHeight = `${height}`;
         href={links.download}
         download
         target="_blank"
-        class="flex space-x-2 items-center bg-zinc-800 px-3 py-3 rounded hover:text-zinc-300/80 justify-center text-sm lg:text-base"
+        class="flex space-x-3 items-center bg-zinc-800 px-3 py-3 rounded hover:text-zinc-300/80 justify-center text-sm lg:text-base"
       >
         <span class="inline-block">Download</span>
         <button class="flex items-center space-x-4">
@@ -107,30 +108,80 @@ const imageHeight = `${height}`;
       />
     </div>
 
-    <div
-      class="flex flex-col md:flex-row w-full md:items-center justify-around py-4 space-y-2 md:space-y-0"
-    >
-      <div class="flex space-x-2 text-sm">
-        <p class="font-medium">Posted on:</p>
-        <span class="text-zinc-300"
-          >{new Date(created_at).toLocaleDateString()}</span
-        >
+    <div class="flex flex-col py-4 bg-zinc-800 px-4 rounded-md w-6/12">
+      <div class="flex w-full py-4 space-x-4 justify-around">
+        <div>
+          <p class="font-medium">Posted on</p>
+          <span class="text-sm text-zinc-300">
+            {new Date(created_at).toLocaleDateString()}
+          </span>
+        </div>
+        <div>
+          <p class="font-medium">View</p>
+          <span class="text-sm text-zinc-300">
+            {views}
+          </span>
+        </div>
+        <div>
+          <p class="font-medium">Downloads</p>
+          <span class="text-sm text-zinc-300">
+            {downloads}
+          </span>
+        </div>
+        <div>
+          <p class="font-medium">Likes</p>
+          <span class="text-sm text-zinc-300">
+            {likes}
+          </span>
+        </div>
       </div>
-      <div class="flex space-x-2 text-sm">
-        <p class="font-medium">Dimension:</p>
-        <span class="text-zinc-300"> {width} x {height}</span>
-      </div>
-      <div class="flex space-x-2 text-sm">
-        <p class="font-medium">Likes:</p>
-        <span class="text-zinc-300"> {likes}</span>
-      </div>
-      <div class="flex space-x-2 text-sm">
-        <p class="font-medium">Views:</p>
-        <span class="text-zinc-300"> {views}</span>
-      </div>
-      <div class="flex space-x-2 text-sm">
-        <p class="font-medium">Downloads:</p>
-        <span class="text-zinc-300"> {downloads}</span>
+
+      <div class="flex w-full py-4 space-x-4 justify-around">
+        <div>
+          <p class="font-medium">Camera</p>
+          {
+            function () {
+              if (exif.make === null)
+                return <span class="text-zinc-300 text-sm"> -- </span>;
+              else
+                return (
+                  <span class="text-sm text-zinc-300">
+                    {exif.make},{exif.model}
+                  </span>
+                );
+            }
+          }
+        </div>
+        <div>
+          <p class="font-medium">ISO</p>
+          {
+            function () {
+              if (exif.iso === null)
+                return <span class="text-zinc-300 text-sm"> -- </span>;
+              else return <span class="text-sm text-zinc-300">{exif.iso}</span>;
+            }
+          }
+        </div>
+        <div>
+          <p class="font-medium">Dimensions</p>
+          <span class="text-sm text-zinc-300">
+            {`${width} x ${height}`}
+          </span>
+        </div>
+
+        <div>
+          <p class="font-medium">Focal</p>
+          {
+            function () {
+              if (exif.focal_length === null)
+                return <span class="text-zinc-300 text-sm"> -- </span>;
+              else
+                return (
+                  <span class="text-sm text-zinc-300">{exif.focal_length}</span>
+                );
+            }
+          }
+        </div>
       </div>
     </div>
 
