@@ -2,12 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import Cards from "../components/Cards.astro";
 import type { ImageDatas } from "../interfaces/interfaces";
+import Button from "../components/Button.astro";
 
 const API_KEY = import.meta.env.TOP_SECRET;
 let imageDatas = [] as ImageDatas[];
 
 let response = await fetch(
-  `https://api.unsplash.com/photos/?client_id=${API_KEY}`
+  `https://api.unsplash.com/photos/?per_page=30&client_id=${API_KEY}`
 );
 let data = await response.json();
 
@@ -31,4 +32,5 @@ imageDatas = data;
       ))
     }
   </div>
+  <Button title="Load More" />
 </Layout>
