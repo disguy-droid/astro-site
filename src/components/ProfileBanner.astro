@@ -36,7 +36,7 @@ const {
     alt="users_profile_image"
     class="rounded-full"
   />
-  <h1 class="text-zinc-100 text-4xl font-bold">
+  <h1 class="text-zinc-100 text-3xl lg:text-4xl font-bold">
     {name}
   </h1>
   <h2 class="text-zinc-300/80 text-sm">
@@ -48,7 +48,7 @@ const {
       if (bio === null) return null;
       else {
         return (
-          <p class="text-sm text-zinc-100 max-w-md text-center leading-relaxed ">
+          <p class="text-sm text-zinc-100 max-w-xs lg:max-w-md text-center leading-relaxed ">
             {bio}
           </p>
         );
