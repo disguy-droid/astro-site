@@ -1,33 +1,32 @@
 ---
+import type { Photos } from "../../../interfaces/interfaces";
+import Layout from "../../../layouts/Layout.astro";
 import { Image } from "@astrojs/image/components";
-import type { ImageDatas, Photos } from "../../interfaces/interfaces";
-import Layout from "../../layouts/Layout.astro";
 
 const API_KEY = import.meta.env.TOP_SECRET;
 const { id } = Astro.params;
-let photo_datas = {} as Photos;
-
-let photo_res = await fetch(
+let related_photo = {} as Photos;
+const related_photo_response = await fetch(
   `https://api.unsplash.com/photos/${id}?client_id=${API_KEY}`
 );
 
-let res_photo_data = await photo_res.json();
-photo_datas = res_photo_data;
+let related_photo_data = await related_photo_response.json();
+related_photo = related_photo_data;
 
 const {
-  user,
-  links,
-  urls,
+  created_at,
   width,
   height,
-  created_at,
+  description,
+  urls,
+  links,
   likes,
-  views,
-  downloads,
+  user,
   exif,
+  views,
   related_collections,
-} = photo_datas;
-
+  downloads,
+} = related_photo;
 const imageWidth = `${width}`;
 const imageHeight = `${height}`;
 ---
@@ -97,13 +96,7 @@ const imageHeight = `${height}`;
         <div>
           <p class="font-medium">Posted on</p>
           <span class="text-sm text-zinc-300">
-            {
-              new Date(created_at).toLocaleDateString("en-us", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })
-            }
+            {new Date(created_at).toLocaleDateString()}
           </span>
         </div>
         <div>
@@ -175,18 +168,18 @@ const imageHeight = `${height}`;
       </div>
     </div>
 
-    <div id="related-content">
+    <div class="">
       <h2 class="text-lg lg:text-2xl font-medium">More like this</h2>
       <div
         class="columns-1 md:columns-2 lg:columns-3 gap-4 py-8 space-y-4 break-before-avoid"
       >
         {
-          related_collections.results?.map((collection) => {
+          related_collections.results.map((collection) => {
             return (
-              <div class="relative group overflow-hidden rounded-md">
+              <div class="relative group">
                 <a
                   href={`/photos/related_photos/${collection.cover_photo.id}`}
-                  class="block"
+                  class="block group overflow-hidden rounded-md"
                 >
                   <Image
                     width={1080}
@@ -198,6 +191,7 @@ const imageHeight = `${height}`;
                     quality={50}
                   />
                 </a>
+
                 <div class="absolute bottom-0 flex justify-between w-full items-center py-4 px-4">
                   <a
                     href={`/users/${collection.cover_photo.user.username}`}

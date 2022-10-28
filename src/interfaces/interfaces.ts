@@ -178,6 +178,20 @@ export interface Photos {
             self: string;
             download: string;
           };
+          user: {
+            id: string;
+            name: string;
+            username: string;
+            first_name: string;
+            last_name: string;
+            bio: string;
+            location: string;
+            profile_image: {
+              small: string;
+              medium: string;
+              large: string;
+            };
+          };
         };
         user: {
           id: string;

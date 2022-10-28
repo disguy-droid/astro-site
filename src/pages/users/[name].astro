@@ -3,31 +3,11 @@ import Layout from "../../layouts/Layout.astro";
 import ProfileBanner from "../../components/ProfileBanner.astro";
 import PhotoLists from "../../components/PhotoLists.astro";
 import Button from "../../components/Button.astro";
-import type {
-  ImageDatas,
-  UserDatas,
-  UserPhotos,
-} from "../../interfaces/interfaces";
-
-export async function getStaticPaths() {
-  const API_KEY = import.meta.env.TOP_SECRET;
-  let imageDatas = [] as ImageDatas[];
-
-  let response = await fetch(
-    `https://api.unsplash.com/photos/?client_id=${API_KEY}`
-  );
-  let datas = await response.json();
-  imageDatas = datas;
-
-  return imageDatas?.map(({ user, urls }) => {
-    return {
-      params: { name: `${user.username}` },
-    };
-  });
-}
+import type { UserDatas, UserPhotos } from "../../interfaces/interfaces";
 
 const { name } = Astro.params;
 const API_KEY = import.meta.env.TOP_SECRET;
+
 let user_datas = {} as UserDatas;
 let user_data_photos = [] as UserPhotos[];
 
@@ -43,29 +23,19 @@ let res_user_data_photos = await user_data_photo_res.json();
 
 user_datas = res_user_data;
 user_data_photos = res_user_data_photos;
-
-const {
-  username,
-  profile_image,
-  bio,
-  social,
-  location,
-  followers_count,
-  following_count,
-} = user_datas;
 ---
 
-<Layout title={name}>
+<Layout title={user_datas.name}>
   <div class="py-8 flex flex-col justify-center w-full space-y-8">
     <ProfileBanner
-      name={name}
-      username={username}
-      profile_image={profile_image}
-      bio={bio}
-      social={social}
-      location={location}
-      followers={followers_count}
-      following={following_count}
+      name={user_datas.name}
+      username={user_datas.username}
+      profile_image={user_datas.profile_image}
+      bio={user_datas.bio}
+      social={user_datas.social}
+      location={user_datas.location}
+      followers={user_datas.followers_count}
+      following={user_datas.following_count}
     />
 
     <Button title={"Hello"} />
@@ -74,8 +44,9 @@ const {
       class="columns-1 md:columns-2 lg:columns-3 break-before-avoid space-y-4 inline-block text-zinc-100"
     >
       {
-        user_data_photos.map(({ user, urls, width, height, links }) => (
+        user_data_photos?.map(({ id, user, urls, width, height, links }) => (
           <PhotoLists
+            id={id}
             urls={urls}
             width={width}
             height={height}
