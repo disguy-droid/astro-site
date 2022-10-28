@@ -20,15 +20,22 @@ export async function getStaticPaths() {
   });
 }
 
-const { id } = Astro.params;
 const API_KEY = import.meta.env.TOP_SECRET;
+const { id } = Astro.params;
 let photo_datas = {} as Photos;
+let photo_lists = [] as ImageDatas[];
 
 let photo_res = await fetch(
   `https://api.unsplash.com/photos/${id}?client_id=${API_KEY}`
 );
+
+let photo_list = await fetch(
+  `https://api.unsplash.com/photos/?client_id=${API_KEY}`
+);
+let photo_list_res = await photo_list.json();
 let res_photo_data = await photo_res.json();
 photo_datas = res_photo_data;
+photo_lists = photo_list_res;
 
 const {
   user,
@@ -40,7 +47,6 @@ const {
   likes,
   views,
   downloads,
-  related_collections,
   exif,
 } = photo_datas;
 
@@ -108,8 +114,8 @@ const imageHeight = `${height}`;
       />
     </div>
 
-    <div class="flex flex-col py-4 bg-zinc-800 px-4 rounded-md w-6/12">
-      <div class="flex w-full py-4 space-x-4 justify-around">
+    <div class="flex flex-col py-4 rounded-md lg:w-6/12 text-sm lg:text-base">
+      <div class="grid grid-cols-4 w-full py-4 space-x-4">
         <div>
           <p class="font-medium">Posted on</p>
           <span class="text-sm text-zinc-300">
@@ -136,7 +142,7 @@ const imageHeight = `${height}`;
         </div>
       </div>
 
-      <div class="flex w-full py-4 space-x-4 justify-around">
+      <div class="grid grid-cols-4 w-full py-4 space-x-4">
         <div>
           <p class="font-medium">Camera</p>
           {
@@ -146,7 +152,7 @@ const imageHeight = `${height}`;
               else
                 return (
                   <span class="text-sm text-zinc-300">
-                    {exif.make},{exif.model}
+                    {exif.make}, {exif.model}
                   </span>
                 );
             }
@@ -186,22 +192,66 @@ const imageHeight = `${height}`;
     </div>
 
     <div class="">
-      <h2 class="text-lg lg:text-2xl font-medium">More like this</h2>
+      <h2 class="text-lg lg:text-2xl font-medium">More</h2>
       <div
         class="columns-1 md:columns-2 lg:columns-3 gap-4 py-8 space-y-4 break-before-avoid"
       >
         {
-          related_collections.results?.map(({ cover_photo }) => (
-            <Image
-              width={600}
-              aspectRatio={`${cover_photo.width}:${cover_photo.height}`}
-              src={cover_photo.urls.regular}
-              class:list={"rounded-md"}
-              alt={"related_image"}
-              format={"webp"}
-              quality={50}
-            />
-          ))
+          photo_lists
+            ?.filter((list) => list.id !== id)
+            .map((list) => {
+              return (
+                <div class="relative group">
+                  <a href={`/photos/${list.id}`}>
+                    <Image
+                      width={600}
+                      aspectRatio={`${list.width}:${list.height}`}
+                      src={list.urls.regular}
+                      class:list={"rounded-md"}
+                      alt={"related_image"}
+                      format={"webp"}
+                      quality={50}
+                    />
+                  </a>
+                  <div class="absolute bottom-0 flex justify-between w-full items-center py-4 px-4">
+                    <a
+                      href={`/users/${list.user.username}`}
+                      class="group-hover:flex items-center space-x-2 hidden group-hover:transition-all duration-300 ease-in-out group-hover:bg-zinc-900/40 backdrop-blur-md px-2 py-2 rounded-md"
+                    >
+                      <div class="w-8 h-8 rounded-md overflow-hidden">
+                        <img
+                          src={list.user.profile_image.medium}
+                          alt=""
+                        />
+                      </div>
+                      <p class="font-medium text-base hover:text-zinc-300">
+                        {list.user.name}
+                      </p>
+                    </a>
+
+                    <a
+                      href={list.links.download}
+                      download
+                      target="_blank"
+                    >
+                      <button class="group-hover:flex items-center space-x-4 hidden group-hover:transition-all duration-300 ease-in-out group-hover:bg-zinc-900/40 backdrop-blur-md px-4 py-4 rounded-md hover:text-zinc-300/80">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-download w-4 h-4"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                        </svg>
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              );
+            })
         }
       </div>
     </div>

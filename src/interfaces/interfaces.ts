@@ -174,6 +174,20 @@ export interface Photos {
             regular: string;
             small: string;
           };
+          links: {
+            self: string;
+            download: string;
+          };
+        };
+        user: {
+          id: string;
+          username: string;
+          name: string;
+          profile_image: {
+            small: string;
+            medium: string;
+            large: string;
+          };
         };
       }
     ];
