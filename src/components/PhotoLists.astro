@@ -28,7 +28,10 @@ const { id, urls, width, height, links, user } = Astro.props as PhotoListProps;
 ---
 
 <div class="w-full rounded-md overflow-hidden group relative">
-  <a href={`/photos/${id}`}>
+  <a
+    href={`/photos/${id}`}
+    class="block group"
+  >
     <Image
       width={1080}
       aspectRatio={`${width}:${height}`}
@@ -40,11 +43,11 @@ const { id, urls, width, height, links, user } = Astro.props as PhotoListProps;
     />
   </a>
   <div
-    class="absolute bottom-0 flex justify-between w-full items-center py-4 px-4"
+    class="absolute bottom-0 flex justify-between w-full items-center py-2 px-2 group-hover:bg-gradient-to-t from-black/80 to-transparent bg-transparent"
   >
     <a
       href={`/users/${user.username}`}
-      class="flex lg:group-hover:flex items-center space-x-2 lg:hidden group-hover:transition-all duration-300 ease-in-out bg-zinc-900/40 lg:group-hover:bg-zinc-900/40 backdrop-blur-md px-2 py-2 rounded-md text-sm lg:text-base"
+      class="flex lg:group-hover:flex items-center space-x-2 lg:hidden px-2 py-2 rounded-md text-sm lg:text-base"
     >
       <div class="w-8 h-8 rounded-md overflow-hidden">
         <img
@@ -62,7 +65,7 @@ const { id, urls, width, height, links, user } = Astro.props as PhotoListProps;
       target="_blank"
     >
       <button
-        class="flex lg:group-hover:flex items-center space-x-4 lg:hidden group-hover:transition-all duration-300 ease-in-out bg-zinc-900/40 lg:group-hover:bg-zinc-900/40 backdrop-blur-md px-4 py-4 rounded-md hover:text-zinc-300/80"
+        class="flex lg:group-hover:flex items-center space-x-4 lg:hidden px-4 py-4 rounded-md hover:text-zinc-300/80"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
