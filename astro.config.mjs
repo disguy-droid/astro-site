@@ -7,18 +7,15 @@ import tailwind from "@astrojs/tailwind";
 import image from "@astrojs/image";
 
 // https://astro.build/config
-import node from "@astrojs/node";
+import netlify from "@astrojs/netlify/functions";
+
+// https://astro.build/config
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [
-    tailwind(),
-    image({
-      serviceEntryPoint: "@astrojs/image/sharp",
-    }),
-  ],
+  integrations: [tailwind(), image({
+    serviceEntryPoint: "@astrojs/image/sharp"
+  })],
   output: "server",
-  adapter: node({
-    mode: "standalone",
-  }),
+  adapter: netlify()
 });
