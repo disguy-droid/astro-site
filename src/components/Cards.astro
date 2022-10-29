@@ -11,6 +11,7 @@ export interface CardProps {
   links: {
     self: string;
     download: string;
+    download_location: string;
   };
   user: {
     id: string;
@@ -30,12 +31,13 @@ const { id, urls, user, width, height, links } = Astro.props as CardProps;
 ---
 
 <div class="w-full rounded-md overflow-hidden">
-  <div class="relative group cursor-pointer group">
+  <div class="relative group cursor-pointer group gap-8">
     <a
       href={`/photos/${id}`}
       class="block group"
     >
       <Image
+        id={"image"}
         width={1080}
         aspectRatio={`${width}:${height}`}
         src={urls.regular}
@@ -43,10 +45,11 @@ const { id, urls, user, width, height, links } = Astro.props as CardProps;
         class="group-hover:scale-105 transition-all ease-in-out duration-700"
         format={"webp"}
         quality={50}
+        loading={"lazy"}
       />
     </a>
     <div
-      class="absolute bottom-0 flex justify-between w-full items-center py-2 px-2 group-hover:bg-gradient-to-t from-black/80 to-transparent bg-transparent"
+      class="absolute bottom-0 flex justify-between w-full items-center py-2 px-2 bg-gradient-to-t lg:bg-none lg:group-hover:bg-gradient-to-t from-black/80 to-transparent bg-transparent"
     >
       <a
         href={`/users/${user.username}`}
@@ -64,30 +67,31 @@ const { id, urls, user, width, height, links } = Astro.props as CardProps;
       </a>
 
       <a
-        href={links.download}
+        rel="nofollow"
+        href={`${links.download}?force=true`}
         download
         target="_blank"
+        title="Download Photo"
+        class="flex lg:group-hover:flex items-center space-x-4 lg:hidden px-4 py-4 rounded-md hover:text-zinc-300/80"
       >
-        <button
-          class="flex lg:group-hover:flex items-center space-x-4 lg:hidden px-4 py-4 rounded-md hover:text-zinc-300/80"
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-download w-4 h-4"
+          viewBox="0 0 16 16"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-download w-4 h-4"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"
-            ></path>
-            <path
-              d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"
-            ></path>
-          </svg>
-        </button>
+          <path
+            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"
+          ></path>
+          <path
+            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"
+          ></path>
+        </svg>
       </a>
     </div>
   </div>
 </div>
+
+<style></style>

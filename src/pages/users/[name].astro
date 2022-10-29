@@ -11,18 +11,26 @@ const API_KEY = import.meta.env.TOP_SECRET;
 let user_datas = {} as UserDatas;
 let user_data_photos = [] as UserPhotos[];
 
-let user_data_res = await fetch(
-  `https://api.unsplash.com/users/${name}/?client_id=${API_KEY}`
-);
-let res_user_data = await user_data_res.json();
+try {
+  let user_data_res = await fetch(
+    `https://api.unsplash.com/users/${name}/?client_id=${API_KEY}`
+  );
+  let res_user_data = await user_data_res.json();
+  user_datas = res_user_data;
+} catch (e) {
+  console.error(e);
+}
 
-let user_data_photo_res = await fetch(
-  `https://api.unsplash.com/users/${name}/photos/?client_id=${API_KEY}`
-);
-let res_user_data_photos = await user_data_photo_res.json();
+try {
+  let user_data_photo_res = await fetch(
+    `https://api.unsplash.com/users/${name}/photos/?per_page=20&client_id=${API_KEY}`
+  );
+  let res_user_data_photos = await user_data_photo_res.json();
 
-user_datas = res_user_data;
-user_data_photos = res_user_data_photos;
+  user_data_photos = res_user_data_photos;
+} catch (e) {
+  console.error(e);
+}
 ---
 
 <Layout title={user_datas.name}>
@@ -38,7 +46,7 @@ user_data_photos = res_user_data_photos;
       following={user_datas.following_count}
     />
 
-    <Button title={`${user_datas.name}'s photos`} />
+    <Button title={`${user_datas.name}'s Photos`} />
 
     <section
       class="columns-1 md:columns-2 lg:columns-3 break-before-avoid space-y-4 inline-block text-zinc-100"

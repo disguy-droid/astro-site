@@ -13,6 +13,7 @@ export interface ImageDatas {
   links: {
     self: string;
     download: string;
+    download_location: string;
   };
   user: {
     id: string;

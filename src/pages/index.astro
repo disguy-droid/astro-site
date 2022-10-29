@@ -6,11 +6,15 @@ import type { ImageDatas } from "../interfaces/interfaces";
 const API_KEY = import.meta.env.TOP_SECRET;
 let imageDatas = [] as ImageDatas[];
 
-let response = await fetch(
-  `https://api.unsplash.com/photos/?per_page=30&client_id=${API_KEY}`
-);
-let data = await response.json();
-imageDatas = data;
+try {
+  let response = await fetch(
+    `https://api.unsplash.com/photos/?per_page=30&client_id=${API_KEY}`
+  );
+  let data = await response.json();
+  imageDatas = data;
+} catch (e) {
+  console.error(e);
+}
 ---
 
 <Layout title="Photos">
