@@ -89,11 +89,11 @@ const imageAspectRatio = `${width / height}`;
           id={"image"}
           width={`${Math.round((width / height) * 900)}`}
           aspectRatio={`${width}:${height}`}
-          src={urls.regular}
+          src={urls.small}
           alt={"unsplash-image"}
           class="rounded-md"
           format={"webp"}
-          quality={50}
+          quality={40}
           loading={"lazy"}
         />
       </div>
@@ -203,13 +203,13 @@ const imageAspectRatio = `${width / height}`;
                   class="block group overflow-hidden rounded-md"
                 >
                   <Image
-                    width={1080}
+                    width={420}
                     aspectRatio={`${collection.cover_photo.width}:${collection.cover_photo.height}`}
-                    src={collection.cover_photo.urls.regular}
+                    src={collection.cover_photo.urls.small}
                     alt={"unsplash-image"}
                     class="group-hover:scale-105 transition-all ease-in-out duration-700"
                     format={"webp"}
-                    quality={50}
+                    quality={40}
                   />
                 </a>
 
