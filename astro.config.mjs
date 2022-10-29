@@ -18,7 +18,5 @@ export default defineConfig({
     }),
   ],
   output: "server",
-  adapter: netlify({
-    dist: new URL("./dist/", import.meta.url),
-  }),
+  adapter: netlify({}),
 });

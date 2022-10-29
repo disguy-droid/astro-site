@@ -33,7 +33,7 @@ const { id, urls, width, height, links, user } = Astro.props as PhotoListProps;
     class="block group"
   >
     <Image
-      width={1080}
+      width={520}
       aspectRatio={`${width}:${height}`}
       src={urls.regular}
       alt="unsplash-image"
@@ -43,7 +43,7 @@ const { id, urls, width, height, links, user } = Astro.props as PhotoListProps;
     />
   </a>
   <div
-    class="absolute bottom-0 flex justify-between w-full items-center py-2 px-2 group-hover:bg-gradient-to-t from-black/80 to-transparent bg-transparent"
+    class="absolute bottom-0 flex justify-between w-full items-center py-2 px-2 bg-gradient-to-t lg:bg-transparent group-hover:bg-gradient-to-t from-black/80 to-transparent bg-transparent"
   >
     <a
       href={`/users/${user.username}`}

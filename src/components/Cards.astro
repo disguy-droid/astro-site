@@ -38,14 +38,13 @@ const { id, urls, user, width, height, links } = Astro.props as CardProps;
     >
       <Image
         id={"image"}
-        width={1080}
+        width={520}
         aspectRatio={`${width}:${height}`}
         src={urls.regular}
         alt={"unsplash-image"}
         class="group-hover:scale-105 transition-all ease-in-out duration-700"
         format={"webp"}
         quality={50}
-        loading={"lazy"}
       />
     </a>
     <div
