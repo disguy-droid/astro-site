@@ -91,7 +91,7 @@ const imageAspectRatio = `${width / height}`;
           id={"image"}
           width={`${Math.round((width / height) * 900)}`}
           aspectRatio={`${width}:${height}`}
-          src={urls.small}
+          src={urls.regular}
           alt={"unsplash-image"}
           format={"webp"}
           quality={40}
@@ -205,9 +205,9 @@ const imageAspectRatio = `${width / height}`;
                   class="block group"
                 >
                   <Image
-                    width={420}
+                    width={480}
                     aspectRatio={`${collection.cover_photo.width}:${collection.cover_photo.height}`}
-                    src={collection.cover_photo.urls.small}
+                    src={collection.cover_photo.urls.regular}
                     alt={"unsplash-image"}
                     class="group-hover:scale-105 transition-all ease-in-out duration-700"
                     format={"webp"}
@@ -215,7 +215,7 @@ const imageAspectRatio = `${width / height}`;
                     loading={"lazy"}
                   />
                 </a>
-                <div class="absolute bottom-0 flex justify-between w-full items-center py-2 px-2 bg-gradient-to-t lg:bg-none lg:group-hover:bg-gradient-to-t from-black/80 to-transparent bg-transparent">
+                <div class="absolute bottom-0 flex justify-between w-full items-center py-2 px-2 bg-gradient-to-t from-black/80 to-transparent  lg:group-hover:bg-gradient-to-t lg:from-black/80 lg:to-transparent lg:bg-none">
                   <a
                     href={`/users/${collection.cover_photo.user.username}`}
                     class="flex lg:group-hover:flex items-center space-x-2 lg:hidden  px-2 py-2 rounded-md text-sm lg:text-base"
