@@ -41,7 +41,7 @@ const imageAspectRatio = `${width / height}`;
     <div class="flex justify-between w-full items-center py-4">
       <a
         href={`/users/${user.username}`}
-        class="flex items-center space-x-3 transition-all duration-300 ease-in-out bg-zinc-800 px-3 py-2 rounded-md text-sm lg:text-base"
+        class="flex items-center space-x-3 transition-all duration-300 ease-in-out px-3 py-2 rounded-md border border-stone-800 hover:bg-zinc-800 hover:text-zinc-300"
       >
         <div class="w-8 h-8 rounded-md overflow-hidden">
           <img
@@ -49,7 +49,7 @@ const imageAspectRatio = `${width / height}`;
             alt=""
           />
         </div>
-        <p class="font-medium hover:text-zinc-300">
+        <p class="font-medium text-xs lg:text-sm">
           {user.name}
         </p>
       </a>
@@ -57,9 +57,9 @@ const imageAspectRatio = `${width / height}`;
         href={links.download}
         download
         target="_blank"
-        class="flex space-x-3 items-center bg-zinc-800 px-3 py-3 rounded hover:text-zinc-300/80 justify-center text-sm lg:text-base"
+        class="flex space-x-3 items-center px-3 py-3 transition-all duration-300 ease-in-out rounded-md hover:text-zinc-300/80 justify-center border border-stone-800 hover:bg-zinc-800"
       >
-        <span class="inline-block">Download</span>
+        <span class="inline-block text-xs lg:text-sm">Download</span>
         <button class="flex items-center space-x-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
