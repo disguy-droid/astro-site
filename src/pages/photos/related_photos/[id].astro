@@ -197,7 +197,7 @@ const imageAspectRatio = `${width / height}`;
         {
           related_collections.results?.map((collection) => {
             return (
-              <div class="relative group">
+              <div class="relative group rounded-md overflow-hidden">
                 <a
                   href={`/photos/related_photos/${collection.cover_photo.id}`}
                   class="block group overflow-hidden rounded-md"
