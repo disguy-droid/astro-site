@@ -2,7 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import Cards from "../components/Cards.astro";
 import type { ImageDatas } from "../interfaces/interfaces";
-import SomeComponent from "../components/SomeComponent.vue";
 
 const API_KEY = import.meta.env.TOP_SECRET;
 let imageDatas = [] as ImageDatas[];
@@ -16,12 +15,9 @@ try {
 } catch (e) {
   console.error(e);
 }
-
-const message = "Hello Vue";
 ---
 
 <Layout title="Photos">
-  <SomeComponent message={"message"} />
   <div
     class="columns-1 md:columns-2 lg:columns-3 break-before-avoid space-y-4 inline-block text-zinc-100 py-8"
   >
