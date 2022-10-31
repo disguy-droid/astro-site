@@ -43,7 +43,7 @@ const imageAspectRatio = `${width / height}`;
         href={`/users/${user.username}`}
         class="flex items-center space-x-3 transition-all duration-300 ease-in-out px-3 py-2 rounded-md border border-stone-800 hover:bg-zinc-800 hover:text-zinc-300"
       >
-        <div class="w-8 h-8 rounded-md overflow-hidden">
+        <div class="w-6 h-6 md:w-8 md:h-8 rounded-md overflow-hidden">
           <img
             src={user.profile_image.medium}
             alt=""
@@ -87,13 +87,13 @@ const imageAspectRatio = `${width / height}`;
       <div id="image-container">
         <Image
           id={"image"}
-          width={`${Math.round((width / height) * 900)}`}
+          width={`${Math.round((width / height) * 1400)}`}
           aspectRatio={`${width}:${height}`}
           src={urls.regular}
           alt={"unsplash-image"}
           class="rounded-md"
           format={"webp"}
-          quality={40}
+          quality={50}
           loading={"lazy"}
         />
       </div>
@@ -203,17 +203,17 @@ const imageAspectRatio = `${width / height}`;
                   class="block group overflow-hidden rounded-md"
                 >
                   <Image
-                    width={480}
+                    width={`${Math.round((width / height) * 1200)}`}
                     aspectRatio={`${collection.cover_photo.width}:${collection.cover_photo.height}`}
-                    src={collection.cover_photo.urls.small}
-                    alt={"unsplash-image"}
+                    src={collection.cover_photo.urls.regular}
+                    alt={`${collection.cover_photo.user.name}'s Photo`}
                     class="group-hover:scale-105 transition-all ease-in-out duration-700 w-full"
                     format={"webp"}
                     quality={40}
                   />
                 </a>
 
-                <div class="absolute bottom-0 flex justify-between w-full items-center py-4 px-4 bg-gradient-to-t lg:bg-none lg:group-hover:bg-gradient-to-t from-black/80 to-transparent bg-transparent">
+                <div class="absolute bottom-0 flex justify-between w-full items-center py-2 px-2 bg-gradient-to-t lg:bg-none lg:group-hover:bg-gradient-to-t from-black/80 to-transparent bg-transparent">
                   <a
                     href={`/users/${collection.cover_photo.user.username}`}
                     class="flex lg:group-hover:flex items-center space-x-2 lg:hidden  px-2 py-2 rounded-md text-sm lg:text-base"
@@ -221,7 +221,7 @@ const imageAspectRatio = `${width / height}`;
                     <div class="w-8 h-8 rounded-md overflow-hidden">
                       <img
                         src={collection.cover_photo.user.profile_image.medium}
-                        alt=""
+                        alt={`${collection.cover_photo.user.name}`}
                       />
                     </div>
                     <p class="font-medium  hover:text-zinc-300">
@@ -234,7 +234,7 @@ const imageAspectRatio = `${width / height}`;
                     download
                     target="_blank"
                   >
-                    <button class="flex lg:group-hover:flex items-center space-x-4 lg:hidden  hover:text-zinc-300/80">
+                    <button class="flex lg:group-hover:flex items-center space-x-4 lg:hidden px-2 py-2 rounded-md   hover:text-zinc-300/80">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"

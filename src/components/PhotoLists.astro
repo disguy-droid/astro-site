@@ -33,10 +33,10 @@ const { id, urls, width, height, links, user } = Astro.props as PhotoListProps;
     class="block group"
   >
     <Image
-      width={`${Math.round((width / height) * 900)}`}
+      width={`${Math.round((width / height) * 1200)}`}
       aspectRatio={`${width}:${height}`}
       src={urls.regular}
-      alt="unsplash-image"
+      alt={`${user.name}'s Photos`}
       class="w-full group-hover:scale-110 transition-all ease-in-out duration-500"
       format={"webp"}
       quality={40}
@@ -52,7 +52,7 @@ const { id, urls, width, height, links, user } = Astro.props as PhotoListProps;
       <div class="w-8 h-8 rounded-md overflow-hidden">
         <img
           src={user.profile_image.medium}
-          alt=""
+          alt={user.name}
         />
       </div>
       <p class="font-medium hover:text-zinc-300">

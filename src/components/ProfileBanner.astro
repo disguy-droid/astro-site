@@ -2,6 +2,7 @@
 export interface ProfileProps {
   name: string;
   username: string;
+  user_link: string;
   profile_image: {
     small: string;
     medium: string;
@@ -27,6 +28,7 @@ const {
   social,
   followers,
   following,
+  user_link,
 } = Astro.props as ProfileProps;
 ---
 
@@ -40,28 +42,14 @@ const {
     <h1 class="text-zinc-100 text-2xl lg:text-4xl font-bold">
       {name}
     </h1>
-    <h2 class="text-zinc-300/80 text-sm mt-2">
+    <a
+      href={user_link}
+      target="_blank"
+      class="text-zinc-300/80 text-sm mt-2 hover:text-purple-400 underline underline-offset-1 decoration-1"
+    >
       @{username}
-    </h2>
-  </div>
+    </a>
 
-  {
-    function () {
-      if (bio === null) return null;
-      else {
-        return (
-          <p class="text-sm text-zinc-100 max-w-xs lg:max-w-md text-center leading-relaxed ">
-            {bio}
-          </p>
-        );
-      }
-    }
-  }
-
-  <div
-    id="details"
-    class="flex flex-col items-center space-y-4"
-  >
     {
       function () {
         if (location === null) return null;
@@ -70,7 +58,7 @@ const {
             <a
               href={`http://maps.google.com/maps?q=${location}`}
               id="location"
-              class="flex items-center space-x-1 hover:underline decoration-purple-500 underline-offset-2 group text-sm lg:text-base "
+              class="flex items-center space-x-1 hover:underline decoration-purple-500 underline-offset-2 group text-sm lg:text-sm mt-3"
               target="_blank"
             >
               <svg
@@ -91,7 +79,25 @@ const {
           );
       }
     }
+  </div>
 
+  {
+    function () {
+      if (bio === null) return null;
+      else {
+        return (
+          <p class="text-sm text-zinc-100 max-w-xs lg:max-w-md text-center leading-relaxed">
+            {bio}
+          </p>
+        );
+      }
+    }
+  }
+
+  <div
+    id="details"
+    class="flex flex-col items-center space-y-4"
+  >
     <div
       id="social_links"
       class="flex items-center space-x-6 text-white"
@@ -176,13 +182,13 @@ const {
       class="text-zinc-200 flex items-center space-x-8"
     >
       <div class="text-center">
-        <h2 class="font-medium text-sm lg:text-base">Followers</h2>
+        <h2 class="font-medium text-sm">Followers</h2>
         <p class="text-xs lg:text-sm text-zinc-300 mt-1">
           {followers}
         </p>
       </div>
       <div class="text-center">
-        <h2 class="font-medium text-sm lg:text-base">Following</h2>
+        <h2 class="font-medium text-sm">Following</h2>
         <p class="text-xs lg:text-sm text-zinc-300 mt-1">
           {following}
         </p>

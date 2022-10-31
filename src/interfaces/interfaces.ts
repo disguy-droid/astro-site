@@ -53,6 +53,7 @@ export interface UserDatas {
   total_photos: number;
   links: {
     self: string;
+    html: string;
     download: string;
   };
   social: {

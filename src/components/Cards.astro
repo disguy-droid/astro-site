@@ -41,7 +41,7 @@ const { id, urls, user, width, height, links } = Astro.props as CardProps;
         width={`${Math.round((width / height) * 900)}`}
         aspectRatio={`${width}:${height}`}
         src={urls.regular}
-        alt={"unsplash-image"}
+        alt={`${user.name}'s Photo`}
         class="group-hover:scale-105 transition-all ease-in-out duration-700 w-full"
         format={"webp"}
         quality={40}
@@ -57,7 +57,7 @@ const { id, urls, user, width, height, links } = Astro.props as CardProps;
         <div class="w-8 h-8 rounded-md overflow-hidden">
           <img
             src={user.profile_image.medium}
-            alt=""
+            alt={user.name}
           />
         </div>
         <p class="font-medium hover:text-zinc-300">
