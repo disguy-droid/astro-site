@@ -33,6 +33,7 @@ const { id, urls, user, width, height, links } = Astro.props as CardProps;
 <div class="w-full rounded-md overflow-hidden">
   <div class="relative group cursor-pointer group gap-8">
     <a
+      id="image-card"
       href={`/photos/${id}`}
       class="block group"
     >
@@ -92,5 +93,3 @@ const { id, urls, user, width, height, links } = Astro.props as CardProps;
     </div>
   </div>
 </div>
-
-<style></style>
