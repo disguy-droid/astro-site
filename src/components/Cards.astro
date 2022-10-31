@@ -45,7 +45,8 @@ const { id, urls, user, width, height, links } = Astro.props as CardProps;
         alt={`${user.name}'s Photo`}
         class="group-hover:scale-105 transition-all ease-in-out duration-700 w-full"
         format={"webp"}
-        quality={40}
+        quality={50}
+        loading={"lazy"}
       />
     </a>
     <div
