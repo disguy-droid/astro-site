@@ -12,6 +12,7 @@ export interface ImageDatas {
   };
   links: {
     self: string;
+    html: string;
     download: string;
     download_location: string;
   };
@@ -124,6 +125,7 @@ export interface Photos {
   };
   links: {
     self: string;
+    html: string;
     download: string;
   };
   likes: number;

@@ -53,31 +53,56 @@ const imageAspectRatio = `${width / height}`;
           {user.name}
         </p>
       </a>
-      <a
-        href={links.download}
-        download
-        target="_blank"
-        class="flex space-x-3 items-center px-3 py-3 transition-all duration-300 ease-in-out rounded-md hover:text-zinc-300/80 justify-center border border-stone-800 hover:bg-zinc-800"
-      >
-        <span class="inline-block text-xs lg:text-sm">Download</span>
-        <button class="flex items-center space-x-4">
+      <div class="flex items-center space-x-2">
+        <a
+          href={links.html}
+          target="_blank"
+          class="flex items-center justify-center space-x-3 transition-all duration-300 ease-in-out hover:text-zinc-300/80 hover:bg-zinc-800 px-2 py-2 rounded-md border border-stone-800"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"
             fill="currentColor"
-            class="bi bi-download w-4 h-4"
+            class="bi bi-box-arrow-up-right w-4 h-4"
             viewBox="0 0 16 16"
           >
             <path
-              d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"
+              fill-rule="evenodd"
+              d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
             ></path>
             <path
-              d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"
+              fill-rule="evenodd"
+              d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
             ></path>
           </svg>
-        </button>
-      </a>
+        </a>
+        <a
+          href={links.download}
+          download
+          target="_blank"
+          class="flex space-x-3 items-center transition-all duration-300 ease-in-out hover:bg-zinc-800 px-2 py-2 rounded-md hover:text-zinc-300/80 justify-center border border-stone-800"
+        >
+          <span class="inline-block text-xs lg:text-sm">Download</span>
+          <button class="flex items-center space-x-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-download w-4 h-4"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"
+              ></path>
+              <path
+                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"
+              ></path>
+            </svg>
+          </button>
+        </a>
+      </div>
     </div>
 
     <div
