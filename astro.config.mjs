@@ -10,16 +10,12 @@ import image from "@astrojs/image";
 import netlify from "@astrojs/netlify/functions";
 
 // https://astro.build/config
-import vue from "@astrojs/vue";
-
-// https://astro.build/config
 export default defineConfig({
   integrations: [
     tailwind(),
     image({
       serviceEntryPoint: "@astrojs/image/sharp",
     }),
-    vue(),
   ],
   output: "server",
   adapter: netlify({}),

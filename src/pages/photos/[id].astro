@@ -283,8 +283,8 @@ const imageAspectRatio = `${width / height}`;
     #container {
       min-height: 300px;
       max-height: 75vh;
-      max-width: calc((var(--imageWidth) / var(--imageHeight)) * 75vh);
-      /* min-width: calc((var(--imageWidth) / var(--imageHeight)) * 300px); */
+      max-width: calc(calc(var(--imageWidth) / var(--imageHeight)) * 75vh);
+      min-width: calc(calc(var(--imageWidth) / var(--imageHeight)) * 300px);
       display: flex;
       justify-content: center;
       margin-right: auto;
