@@ -1,9 +1,9 @@
 export interface ImageDatas {
   id: string;
   created_at: string;
-  color: string;
   width: number;
   height: number;
+  color: string;
   likes: number;
   urls: {
     raw: string;
