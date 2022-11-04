@@ -3,6 +3,7 @@ import { Image } from "@astrojs/image/components";
 
 export interface PhotoListProps {
   id: string;
+  color: string;
   user: {
     username: string;
     name: string;
@@ -24,20 +25,22 @@ export interface PhotoListProps {
   height: number;
 }
 
-const { id, urls, width, height, links, user } = Astro.props as PhotoListProps;
+const { id, urls, width, height, links, user, color } =
+  Astro.props as PhotoListProps;
 ---
 
 <div class="w-full rounded-md overflow-hidden group relative">
   <a
     href={`/photos/${id}`}
-    class="block group"
+    class="block group w-full"
   >
     <Image
+      id={"user_image"}
       width={`${Math.round((width / height) * 1200)}`}
       aspectRatio={`${width}:${height}`}
       src={urls.regular}
       alt={`${user.name}'s Photos`}
-      class="w-full group-hover:scale-110 transition-all ease-in-out duration-500"
+      class={`w-full group-hover:scale-110 transition-all ease-in-out duration-500`}
       format={"webp"}
       quality={40}
     />
@@ -86,3 +89,9 @@ const { id, urls, width, height, links, user } = Astro.props as PhotoListProps;
     </a>
   </div>
 </div>
+
+<style define:vars={{ color }}>
+  #user_image {
+    background-color: var(--color);
+  }
+</style>

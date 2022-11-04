@@ -1,6 +1,7 @@
 export interface ImageDatas {
   id: string;
   created_at: string;
+  color: string;
   width: number;
   height: number;
   likes: number;
@@ -173,6 +174,7 @@ export interface Photos {
           id: string;
           width: number;
           height: number;
+          color: string;
           urls: {
             full: string;
             regular: string;

@@ -3,6 +3,7 @@ import { Image } from "@astrojs/image/components";
 
 export interface CardProps {
   id: string;
+  color: string;
   urls: {
     regular: string;
     small: string;
@@ -27,7 +28,8 @@ export interface CardProps {
   height: number;
 }
 
-const { id, urls, user, width, height, links } = Astro.props as CardProps;
+const { id, urls, user, width, height, links, color } =
+  Astro.props as CardProps;
 ---
 
 <div class="w-full rounded-md overflow-hidden">
@@ -94,3 +96,9 @@ const { id, urls, user, width, height, links } = Astro.props as CardProps;
     </div>
   </div>
 </div>
+
+<style define:vars={{ color }}>
+  #image {
+    background-color: var(--color);
+  }
+</style>

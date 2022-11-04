@@ -53,16 +53,19 @@ try {
       class="columns-1 md:columns-2 lg:columns-3 break-before-avoid space-y-4 inline-block text-zinc-100"
     >
       {
-        user_data_photos?.map(({ id, user, urls, width, height, links }) => (
-          <PhotoLists
-            id={id}
-            urls={urls}
-            width={width}
-            height={height}
-            links={links}
-            user={user}
-          />
-        ))
+        user_data_photos?.map(
+          ({ id, user, urls, width, height, links, color }) => (
+            <PhotoLists
+              id={id}
+              urls={urls}
+              width={width}
+              height={height}
+              links={links}
+              user={user}
+              color={color}
+            />
+          )
+        )
       }
     </section>
   </div>

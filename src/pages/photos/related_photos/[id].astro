@@ -29,6 +29,7 @@ const {
   views,
   related_collections,
   downloads,
+  color,
 } = related_photo;
 const imageWidth = `${width}`;
 const imageHeight = `${height}`;
@@ -228,6 +229,7 @@ const imageAspectRatio = `${width / height}`;
                   class="block group overflow-hidden rounded-md"
                 >
                   <Image
+                    style={`background-color: ${collection.cover_photo.color}`}
                     width={`${Math.round((width / height) * 1200)}`}
                     aspectRatio={`${collection.cover_photo.width}:${collection.cover_photo.height}`}
                     src={collection.cover_photo.urls.regular}
@@ -284,7 +286,7 @@ const imageAspectRatio = `${width / height}`;
   </div>
 </Layout>
 
-<style define:vars={{ imageWidth, imageHeight, imageAspectRatio }}>
+<style define:vars={{ imageWidth, imageHeight, imageAspectRatio, color }}>
   #container {
     min-height: 0;
     max-height: 100%;
@@ -300,6 +302,7 @@ const imageAspectRatio = `${width / height}`;
     display: block;
     height: 100%;
     width: 100%;
+    background-color: var(--color);
   }
 
   @media (min-width: 1024px) {
@@ -325,6 +328,7 @@ const imageAspectRatio = `${width / height}`;
       display: block;
       height: 100%;
       width: 100%;
+      background-color: var(--color);
     }
   }
 </style>
