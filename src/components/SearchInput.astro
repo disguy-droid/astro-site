@@ -1,20 +1,19 @@
+---
+---
+
 <script>
   const searchBox = document.querySelectorAll(".inputBox");
-  const mobileSearchBox = document.querySelector(
-    "#mobileSearchBox"
-  ) as HTMLElement;
+  // const mobileSearchBox = document.querySelector(
+  //   "#mobileSearchBox"
+  // ) as HTMLElement;
   const btn = document.querySelector("#search-btn") as HTMLLinkElement;
-  const toggleButton = document.querySelector(
-    "#toggle-btn"
-  ) as HTMLButtonElement;
+  // const toggleButton = document.querySelector(
+  //   "#toggle-btn"
+  // ) as HTMLButtonElement;
 
-  function toggleBtn() {
-    mobileSearchBox.style.display === "none"
-      ? (mobileSearchBox.style.display = "block")
-      : (mobileSearchBox.style.display = "none");
-  }
-
-  toggleButton.addEventListener("click", toggleBtn);
+  // toggleButton.addEventListener("click", () => {
+  //   mobileSearchBox.classList.toggle("hidden");
+  // });
 
   function handleClick() {
     searchBox.forEach((box: any) => {
@@ -24,6 +23,7 @@
       }
     });
   }
+  btn.addEventListener("click", handleClick);
 
   searchBox.forEach((box: any) => {
     box.addEventListener("keypress", (event: KeyboardEvent) => {
@@ -33,7 +33,6 @@
       }
     });
   });
-  btn.addEventListener("click", handleClick);
 </script>
 
 <div>
@@ -64,7 +63,9 @@
     </button>
   </div>
 
-  <div class="flex md:hidden space-x-2 justify-center items-center w-fit">
+  <div
+    class="flex md:hidden space-x-2 justify-center items-center w-fit relative"
+  >
     <button
       id="toggle-btn"
       class="text-zinc-100 px-2 py-2 bg-zinc-900 rounded-md text-sm border border-stone-800 hover:bg-zinc-800 hover:text-zinc-200/80"
@@ -89,7 +90,6 @@
     value=""
     name="search"
     placeholder="Enter a keyword"
-    style="display: none;"
-    class="inputBox absolute inset-x-1 -bottom-16 px-3 py-4 rounded-md text-zinc-100 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 bg-zinc-800 block md:hidden"
+    class="inputBox absolute inset-x-1 -bottom-16 px-3 py-4 rounded-md text-zinc-100 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 bg-zinc-800"
   />
 </div>
