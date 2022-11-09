@@ -35,25 +35,31 @@
   });
 </script>
 
-<div>
-  <div class="hidden md:flex space-x-2 justify-center items-center">
+<div
+  class="flex justify-center items-center h-80 bg-gradient-to-tr from-green-500 to-purple-600 rounded-md mt-4 relative px-4"
+>
+  <div
+    class="w-full flex justify-center items-center space-x-2 flex-wrap gap-2"
+  >
     <input
       id="searchBox"
       type="search"
       value=""
       name="search"
       placeholder="Enter a keyword"
-      class="inputBox px-3 py-2 rounded-md text-zinc-100 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 bg-zinc-700"
+      class="inputBox px-4 h-12 lg:h-14 rounded-md text-zinc-100 text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-purple-500 bg-zinc-900 w-full lg:w-6/12 border border-stone-700"
     />
     <button
       id="search-btn"
-      class="text-zinc-100 px-2 py-2 bg-zinc-900 rounded-md text-sm border border-stone-800 hover:bg-zinc-800 hover:text-zinc-200/80"
-      ><svg
+      class="text-zinc-200 h-12 lg:h-14 px-4 bg-zinc-900 rounded-md text-sm border border-stone-700 hover:bg-zinc-800 hover:text-zinc-200/80 space-x-2 lg:space-x-0 flex items-center justify-center"
+    >
+      <span class="lg:hidden">Search</span>
+      <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
         height="16"
         fill="currentColor"
-        class="bi bi-search w-5 h-5"
+        class="bi bi-search w-4 h-4 lg:w-6 lg:h-6"
         viewBox="0 0 16 16"
       >
         <path
@@ -62,34 +68,4 @@
       </svg>
     </button>
   </div>
-
-  <div
-    class="flex md:hidden space-x-2 justify-center items-center w-fit relative"
-  >
-    <button
-      id="toggle-btn"
-      class="text-zinc-100 px-2 py-2 bg-zinc-900 rounded-md text-sm border border-stone-800 hover:bg-zinc-800 hover:text-zinc-200/80"
-      ><svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-search w-5 h-5"
-        viewBox="0 0 16 16"
-      >
-        <path
-          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
-        ></path>
-      </svg>
-    </button>
-  </div>
-
-  <input
-    id="mobileSearchBox"
-    type="search"
-    value=""
-    name="search"
-    placeholder="Enter a keyword"
-    class="inputBox absolute inset-x-1 -bottom-16 px-3 py-4 rounded-md text-zinc-100 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 bg-zinc-800"
-  />
 </div>
