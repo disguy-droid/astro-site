@@ -9,7 +9,10 @@ const { search_results } = Astro.params;
 
 let searchImages = [] as ImageDatas[];
 
+let isLoading = false;
+
 try {
+  isLoading = true;
   let response = await fetch(
     `https://api.unsplash.com/search/photos/?per_page=30&client_id=${API_KEY}&query=${search_results}`
   );
@@ -17,30 +20,52 @@ try {
   searchImages = data.results;
 } catch (e) {
   console.error(e);
+} finally {
+  isLoading = false;
 }
 ---
 
 <Layout title="Search Results">
   <div class="mt-8">
-    <h1 class="text-lg lg:text-xl font-medium text-zinc-100">
-      Search Results for: <span class="text-zinc-200">{search_results}</span>
-    </h1>
-  </div>
-  <div
-    class="columns-1 md:columns-2 lg:columns-3 break-before-avoid space-y-4 inline-block text-zinc-100 py-8"
-  >
     {
-      searchImages?.map(({ id, urls, user, width, height, links, color }) => (
-        <Cards
-          id={id}
-          urls={urls}
-          user={user}
-          width={width}
-          height={height}
-          links={links}
-          color={color}
-        />
-      ))
+      function () {
+        if (searchImages.length !== 0)
+          return (
+            <h1 class="text-lg lg:text-xl font-medium text-zinc-100">
+              Search Results for:{" "}
+              <span class="text-zinc-200">{search_results}</span>
+            </h1>
+          );
+      }
+    }
+
+    {
+      function () {
+        if (searchImages.length === 0)
+          return (
+            <h1 class="text-lg lg:text-xl font-medium text-zinc-100">
+              No results found
+            </h1>
+          );
+        else
+          return (
+            <div class="columns-1 md:columns-2 lg:columns-3 break-before-avoid space-y-4 inline-block text-zinc-100 py-8">
+              {searchImages?.map(
+                ({ id, urls, user, width, height, links, color }) => (
+                  <Cards
+                    id={id}
+                    urls={urls}
+                    user={user}
+                    width={width}
+                    height={height}
+                    links={links}
+                    color={color}
+                  />
+                )
+              )}
+            </div>
+          );
+      }
     }
   </div>
 </Layout>
