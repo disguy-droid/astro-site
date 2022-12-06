@@ -1,20 +1,8 @@
 ---
-import SearchButton from "./SearchButton.astro";
+let message = "Hello, Astro";
 ---
 
 <script>
-  // const btn = document.querySelector("#search-btn") as HTMLLinkElement;
-
-  // function handleClick() {
-  //   searchBox.forEach((box: any) => {
-  //     if (box.value.length) {
-  //       window.open(`/search_results/${box.value}`, "_self");
-  //       box.value = "";
-  //     }
-  //   });
-  // }
-  // btn.addEventListener("click", handleClick);
-
   class SearchInput extends HTMLElement {
     constructor() {
       super();
@@ -34,22 +22,15 @@ import SearchButton from "./SearchButton.astro";
 </script>
 
 <search-input
-  class="flex justify-center items-center h-80 bg-gradient-to-tr from-green-500 to-purple-600 rounded-md mt-4 relative px-4"
+  data-message={message}
+  class="flex justify-center items-center h-20 md:h-30 bg-gradient-to-tr from-green-500 to-purple-600 rounded-md mt-4 relative px-4 lg:w-6/12 mx-auto"
 >
-  <!-- <div
-    class="w-full flex justify-center items-center space-x-2 flex-wrap gap-2"
-  >
-    
-  </div> -->
-
   <input
     aria-label="search-input"
     type="search"
     value=""
     name="search"
-    placeholder="Enter a keyword"
-    class="inputBox px-4 h-12 lg:h-14 rounded-md text-zinc-100 text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-purple-500 bg-zinc-900 w-full lg:w-6/12 border border-stone-700"
+    placeholder="Enter a search term"
+    class="inputBox px-4 h-12 lg:h-14 rounded-md text-zinc-100 text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-purple-500 bg-zinc-900 w-full border border-stone-700"
   />
-
-  <!-- <SearchButton /> -->
 </search-input>

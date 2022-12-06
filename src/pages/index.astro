@@ -1,21 +1,23 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Cards from "../components/Cards.astro";
-import type { ImageDatas } from "../interfaces/interfaces";
 import SearchInput from "../components/SearchInput.astro";
-import SearchButton from "../components/SearchButton.astro";
+import type { ImageDatas } from "../interfaces/interfaces";
 
 const API_KEY = import.meta.env.TOP_SECRET;
 let imageDatas = [] as ImageDatas[];
 
 try {
   let response = await fetch(
-    `https://api.unsplash.com/photos/?per_page=30&client_id=${API_KEY}`
+    `https://api.unsplash.com/photos/?per_page=30&client_id=${API_KEY}`,
+    {
+      method: "GET",
+    }
   );
   let data = await response.json();
   imageDatas = data;
-} catch (e) {
-  console.error(e);
+} catch (e: any) {
+  console.error(e.message);
 }
 ---
 
